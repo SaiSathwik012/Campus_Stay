@@ -5,6 +5,9 @@ import Swal from "sweetalert2";
 import { FaUserGraduate, FaEye, FaEyeSlash, FaArrowRight } from "react-icons/fa";
 import "../../styles/StudentLogin.css";
 
+const login_url = process.env.REACT_APP_API_URL
+
+
 const StudentLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,15 +16,12 @@ const StudentLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Check for back navigation and logout if needed
   useEffect(() => {
-    // Check if user is coming back from login/registration
     if (location.state?.fromAuthPage) {
       handleAutoLogout();
       return;
     }
 
-    // Normal token check
     const token = localStorage.getItem("studentToken");
     if (token) {
       showRedirectAlert();
@@ -58,7 +58,7 @@ const StudentLogin = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/student/login",
+        `${login_url}/api/student/login`,
         { email, password },
         { headers: { "Content-Type": "application/json" } }
       );

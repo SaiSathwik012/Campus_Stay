@@ -3,6 +3,9 @@ import { FaHome, FaCamera } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/OwnerRegister.css';
 
+
+const owner_url = process.env.REACT_APP_API_URL
+
 const OwnerRegister = () => {
   const navigate = useNavigate();
   const [imagePreviewUrl, setImagePreviewUrl] = useState('');
@@ -60,7 +63,7 @@ const OwnerRegister = () => {
 
     try {
       setLoading(true);
-      const res = await fetch('http://localhost:5000/api/owner/register', {
+      const res = await fetch(`${process.env.API_URL}/api/owner/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -85,7 +88,7 @@ const OwnerRegister = () => {
         setImagePreviewUrl('');
         setIsChecked(false);
 
-        // Redirect to login after 2 seconds
+
         setTimeout(() => {
           navigate('/owner/login');
         }, 2000);

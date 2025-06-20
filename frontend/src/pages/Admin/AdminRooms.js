@@ -17,6 +17,8 @@ import {
 import { FiEdit } from "react-icons/fi";
 import "../../styles/AdminRooms.css";
 
+const rooms_url = process.env.REACT_APP_API_URL
+
 const AdminRooms = () => {
     const [rooms, setRooms] = useState([]);
     const [filteredRooms, setFilteredRooms] = useState([]);
@@ -33,7 +35,7 @@ const AdminRooms = () => {
                     return;
                 }
 
-                const response = await axios.get("http://localhost:5000/api/rooms", {
+                const response = await axios.get(`${rooms_url}/api/rooms`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -87,7 +89,7 @@ const AdminRooms = () => {
 
             if (result.isConfirmed) {
                 const token = localStorage.getItem("adminToken");
-                await axios.delete(`http://localhost:5000/api/rooms/${id}`, {
+                await axios.delete(`${rooms_url}/api/rooms/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

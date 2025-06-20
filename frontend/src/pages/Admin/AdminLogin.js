@@ -5,6 +5,10 @@ import Swal from "sweetalert2";
 import { FaLock, FaEye, FaEyeSlash, FaArrowRight } from "react-icons/fa";
 import "../../styles/AdminLogin.css";
 
+
+const admin_url =process.env.REACT_APP_API_URL
+
+
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,10 +39,12 @@ const AdminLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
+    const login_url = `${admin_url}/api/admin/login`
+    console.log(login_url);
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/admin/login",
+
+        login_url,
         { email, password },
         { headers: { "Content-Type": "application/json" } }
       );
