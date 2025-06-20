@@ -1,0 +1,74 @@
+.owner-dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    padding: 20px;
+}
+
+.owner-dashboard-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.owner-dashboard-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.owner-dashboard-subtitle {
+    color: #6b7280;
+    margin-bottom: 32px;
+    font-size: 16px;
+}
+
+.dashboard-options {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.dashboard-btn {
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-room-btn {
+    background-color: #10b981;
+    color: white;
+}
+
+.create-room-btn:hover {
+    background-color: #0d9e6e;
+}
+
+.room-list-btn {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.room-list-btn:hover {
+    background-color: #2563eb;
+}
+
+@media (max-width: 480px) {
+    .owner-dashboard-card {
+        padding: 30px 20px;
+    } }
