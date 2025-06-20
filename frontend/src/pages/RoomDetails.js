@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 
-// Animations
+const animations = process.env.REACT_APP_API_URL
 const float = keyframes`
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -337,7 +337,7 @@ const Error = styled.div`
   margin: 1rem 0;
 `;
 
-// Simplified Icons
+
 const BackIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" /></svg>;
 const BedIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4361ee"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>;
 const UserIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4361ee"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>;
@@ -362,7 +362,7 @@ function RoomDetails() {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/rooms/${id}`);
+        const response = await axios.get(`${animations}/api/rooms/${id}`);
         setRoom(response.data);
         setLoading(false);
       } catch (err) {
@@ -411,7 +411,7 @@ function RoomDetails() {
             <>
               <MainImage>
                 <img
-                  src={`http://localhost:5000${room.roomPictures[mainImageIndex]}`}
+                  src={`${animations}${room.roomPictures[mainImageIndex]}`}
                   alt="Room"
                 />
               </MainImage>
@@ -425,7 +425,7 @@ function RoomDetails() {
                       active={index === mainImageIndex}
                       whileHover={{ scale: 1.05 }}
                     >
-                      <img src={`http://localhost:5000${pic}`} alt={`Thumbnail ${index}`} />
+                      <img src={`${animations}${pic}`} alt={`Thumbnail ${index}`} />
                     </Thumbnail>
                   ))}
                 </Thumbnails>

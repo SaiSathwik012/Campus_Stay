@@ -8,6 +8,8 @@ import {
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const room_list = process.env.REACT_APP_API_URL
+
 const RoomList = () => {
     const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -17,15 +19,14 @@ const RoomList = () => {
     const [deleteError, setDeleteError] = useState(null);
     const [deleteSuccess, setDeleteSuccess] = useState(false);
 
-    // Create axios instance with auth interceptor
     const authAxios = axios.create({
-        baseURL: 'http://localhost:5000/api',
+        baseURL: `${room_list}/api`,
         headers: {
             'Content-Type': 'application/json',
         }
     });
 
-    // Add request interceptor to include token
+
     authAxios.interceptors.request.use(
         config => {
             const token = localStorage.getItem('token');
@@ -39,14 +40,13 @@ const RoomList = () => {
         }
     );
 
-    // Add response interceptor to handle 401 errors
+
     authAxios.interceptors.response.use(
         response => response,
         error => {
             if (error.response && error.response.status === 401) {
-                // Handle unauthorized error
                 localStorage.removeItem('token');
-                window.location.href = '/login'; // Redirect to login
+                window.location.href = '/login'; 
             }
             return Promise.reject(error);
         }
@@ -72,7 +72,6 @@ const RoomList = () => {
 
     const handleDelete = async () => {
         try {
-            // Verify token exists before making the request
             const token = localStorage.getItem('token');
             if (!token) {
                 setDeleteError('No authentication token found. Please login again.');
@@ -92,7 +91,6 @@ const RoomList = () => {
                 'Failed to delete room'
             );
 
-            // Handle specific error cases
             if (err.response?.status === 401) {
                 setDeleteError('Session expired. Please login again.');
             } else if (err.response?.status === 404) {
@@ -120,7 +118,7 @@ const RoomList = () => {
                         <Card>
                             <CardImg
                                 top
-                                src={`http://localhost:5000/uploads/${room.roomPictures[0]}`}
+                                src={`${room_list}/uploads/${room.roomPictures[0]}`}
                                 alt={room.roomType}
                             />
                             <CardBody>

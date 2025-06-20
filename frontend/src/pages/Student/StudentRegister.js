@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import { FaUserGraduate, FaEye, FaEyeSlash, FaArrowRight, FaUser, FaEnvelope, FaPhone, FaLock } from "react-icons/fa";
 import "../../styles/StudentRegister.css";
 
+const register_url = process.env.REACT_APP_API_URL
+
 const StudentRegister = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -59,7 +61,6 @@ const StudentRegister = () => {
       [name]: value
     }));
 
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => {
         const newErrors = { ...prev };
@@ -80,13 +81,13 @@ const StudentRegister = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/student/register",
+        `${register_url}/api/student/register`,
         formData,
         {
           headers: { "Content-Type": "application/json" },
           validateStatus: (status) => status < 500 // To handle 4xx errors normally
         }
-      );
+      );    
 
       if (response.data.success) {
         await showSuccessAlert();

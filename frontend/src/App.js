@@ -27,14 +27,13 @@ function App() {
       <Navbar />
       <div className="content">
         <Routes>
-          {/* Public Routes */}
+         
           <Route element={<PublicRoute />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
           </Route>
 
-          {/* Auth Routes - Public but restricted if logged in */}
           <Route element={<PublicRoute restricted={true} />}>
             <Route path="/student/login" element={<StudentLogin />} />
             <Route path="/student/register" element={<StudentRegister />} />
@@ -43,21 +42,18 @@ function App() {
             <Route path="/admin/login" element={<AdminLogin />} />
           </Route>
 
-          {/* Student Private Routes */}
           <Route element={<PrivateRoute role="student" />}>
             <Route path="/room" element={<Room />} />
             <Route path="/rooms" element={<Rooms />} />
             <Route path="/owner/rooms/:id" element={<RoomDetails />} />
           </Route>
 
-          {/* Owner Private Routes */}
           <Route element={<PrivateRoute role="owner" />}>
             <Route path="/owner/dashboard" element={<OwnerDashboard />} />
             <Route path="/owner/room-form" element={<OwnerRoomForm />} />
             <Route path="/all-rooms" element={<RoomList />} />
           </Route>
 
-          {/* Admin Private Routes */}
           <Route element={<PrivateRoute role="admin" />}>
             <Route path="/admin/rooms" element={<AdminRooms />} />
           </Route>

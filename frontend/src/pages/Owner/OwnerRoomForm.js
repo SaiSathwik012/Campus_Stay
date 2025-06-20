@@ -3,7 +3,8 @@ import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import styled, { keyframes, css } from 'styled-components';
 
-// Styled components
+
+const owner_url = process.env.REACT_APP_API_URL
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -376,7 +377,6 @@ const AmenitiesGrid = styled.div`
   }
 `;
 
-// Icons (using simple emoji as placeholders)
 const UploadIcon = () => <span>📁</span>;
 const SuccessIcon = () => <span>✅</span>;
 const ErrorIcon = () => <span>❌</span>;
@@ -411,7 +411,6 @@ function OwnerRoomForm() {
     const [isFormVisible, setIsFormVisible] = useState(false);
 
     useEffect(() => {
-        // Animation trigger
         const timer = setTimeout(() => {
             setIsFormVisible(true);
         }, 300);
@@ -431,7 +430,6 @@ function OwnerRoomForm() {
         const selectedFiles = Array.from(e.target.files);
         setFiles(selectedFiles);
 
-        // Animation effect for file selection
         if (selectedFiles.length > 0) {
             setSuccess(`${selectedFiles.length} file(s) selected`);
             setTimeout(() => setSuccess(''), 2000);
@@ -444,7 +442,6 @@ function OwnerRoomForm() {
         setError('');
         setSuccess('');
 
-        // Validate agreement
         if (!form.agreement) {
             setError('Please confirm that all details are correct');
             setIsSubmitting(false);
@@ -453,7 +450,7 @@ function OwnerRoomForm() {
 
         const data = new FormData();
 
-        // Append all form fields
+
         Object.keys(form).forEach(key => {
             if (key === 'agreement') {
                 data.append(key, form[key].toString());
@@ -462,13 +459,13 @@ function OwnerRoomForm() {
             }
         });
 
-        // Append files
+
         files.forEach(file => {
             data.append('roomPictures', file);
         });
 
         try {
-            await axios.post('http://localhost:5000/api/rooms', data, {
+            await axios.post(`${owner_url}/api/rooms`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -476,7 +473,7 @@ function OwnerRoomForm() {
 
             setSuccess('Room listed successfully!');
 
-            // Reset form
+
             setForm({
                 ownerName: '',
                 fullAddress: '',
@@ -501,7 +498,7 @@ function OwnerRoomForm() {
             });
             setFiles([]);
 
-            // Hide success message after 3 seconds
+
             setTimeout(() => setSuccess(''), 3000);
         } catch (err) {
             console.error('Submission error:', err.response?.data);

@@ -1,32 +1,15 @@
-/* ========= Navbar ========= */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 3rem;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: #ffffff;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-}
-
-.navbar.scrolled {
-    padding: 1rem 3rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-.navbar.dark {
-    background-color: rgba(30, 30, 30, 0.95);
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-}
-
-.navbar.dark.scrolled {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .brand-logo {
@@ -34,11 +17,6 @@
     align-items: center;
     gap: 1rem;
     cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.brand-logo:hover {
-    transform: scale(1.02);
 }
 
 .logo {
@@ -51,18 +29,6 @@
     font-size: 1.5rem;
     font-weight: 700;
     color: #2c3e50;
-    margin: 0;
-    background: linear-gradient(90deg, #3498db, #2ecc71);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.navbar.dark .brand-logo h1 {
-    background: linear-gradient(90deg, #3498db, #2ecc71);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
 }
 
 .nav-container {
@@ -89,7 +55,6 @@
     gap: 0.5rem;
     font-weight: 500;
     color: #2c3e50;
-    transition: all 0.3s ease;
     padding: 0.5rem 1rem;
     border-radius: 8px;
     background: transparent;
@@ -99,88 +64,25 @@
     text-decoration: none;
 }
 
-.navbar.dark .nav-links li a,
-.navbar.dark .nav-links li button {
-    color: #ecf0f1;
-}
-
 .nav-links li a:hover,
 .nav-links li button:not(.logout-btn):hover {
-    color: #3498db;
-    background-color: rgba(52, 152, 219, 0.1);
-    transform: translateY(-2px);
-}
-
-.navbar.dark .nav-links li a:hover,
-.navbar.dark .nav-links li button:not(.logout-btn):hover {
-    color: #2ecc71;
-    background-color: rgba(46, 204, 113, 0.1);
+    background-color: #f0f0f0;
 }
 
 .nav-icon {
     font-size: 1rem;
 }
 
-/* Dark Mode Toggle Button */
-.dark-toggle-btn {
-    background: rgba(0, 0, 0, 0.1);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.dark-toggle-btn:hover {
-    background: rgba(0, 0, 0, 0.2);
-    transform: scale(1.1);
-}
-
-.navbar.dark .dark-toggle-btn {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.navbar.dark .dark-toggle-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* Profile Button */
-.profile-btn {
-    background-color: rgba(52, 152, 219, 0.1);
-    color: #3498db;
-}
-
-.navbar.dark .profile-btn {
-    background-color: rgba(46, 204, 113, 0.1);
-    color: #2ecc71;
-}
-
-.profile-btn:hover {
-    background-color: rgba(52, 152, 219, 0.2) !important;
-}
-
-.navbar.dark .profile-btn:hover {
-    background-color: rgba(46, 204, 113, 0.2) !important;
-}
-
-/* Logout Button */
 .logout-btn {
     background-color: #e74c3c;
     color: white;
-    transition: all 0.3s ease;
 }
 
 .logout-btn:hover {
-    background-color: #c0392b !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+    background-color: #c0392b;
 }
 
-/* Responsive Navbar */
+/* Responsive */
 .menu-icon {
     display: none;
     font-size: 1.5rem;
@@ -188,94 +90,33 @@
     border: none;
     color: #2c3e50;
     cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 1001;
     padding: 0.5rem;
     border-radius: 50%;
 }
 
-.menu-icon:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
-.navbar.dark .menu-icon {
-    color: #ecf0f1;
-}
-
-.navbar.dark .menu-icon:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.menu-icon.open {
-    transform: rotate(90deg);
-}
-
-@media (max-width: 992px) {
-    .navbar {
-        padding: 1.2rem 2rem;
+/* Show menu-icon on small screens */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
     }
 
     .nav-container {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 280px;
-        height: 100vh;
-        background-color: #ffffff;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-        transition: right 0.3s ease;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #ffffff;
         flex-direction: column;
-        justify-content: flex-start;
-        padding-top: 80px;
-        z-index: 1000;
-    }
-
-    .navbar.dark .nav-container {
-        background-color: #1e1e1e;
-        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        display: none;
     }
 
     .nav-container.active {
-        right: 0;
+        display: flex;
     }
 
     .nav-links {
         flex-direction: column;
-        width: 100%;
         gap: 1rem;
-        padding: 0 1.5rem;
-    }
-
-    .nav-links li {
-        width: 100%;
-    }
-
-    .nav-links li a,
-    .nav-links li button {
-        width: 100%;
-        justify-content: flex-start;
-        padding: 0.75rem 1rem;
-    }
-
-    .menu-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        padding: 1rem 0;
     }
 }
-
-@media (max-width: 576px) {
-    .navbar {
-        padding: 1rem 1.5rem;
-    }
-
-    .brand-logo h1 {
-        font-size: 1.3rem;
-    }
-
-    .logo {
-        height: 35px;
-        width: 35px;
-    } }
-
-    

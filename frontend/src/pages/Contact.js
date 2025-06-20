@@ -4,6 +4,8 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaPaperPlane } from "react-icons/f
 import { motion, AnimatePresence } from "framer-motion";
 import { FiSend, FiArrowRight } from "react-icons/fi";
 
+const contact_url = process.env.REACT_APP_API_URL
+
 const float = keyframes`
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -294,7 +296,7 @@ const Contact = () => {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch(`${contact_url}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

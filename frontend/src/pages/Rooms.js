@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { FiSearch, FiFilter, FiMapPin, FiWifi, FiHome, FiUsers, FiCalendar, FiStar } from 'react-icons/fi';
 import { IoBedOutline, IoCarSportOutline, IoMedicalOutline } from 'react-icons/io5';
 
+const rooms_page_url = process.env.REACT_APP_API_URL
 const Container = styled.div`
   max-width: 1440px;
   margin: 0 auto;
@@ -476,7 +477,6 @@ function Rooms() {
   const [showFilters, setShowFilters] = useState(false);
   const [studentName, setStudentName] = useState('');
 
-  // Filter states
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
     roomType: '',
@@ -497,7 +497,7 @@ function Rooms() {
   const applyFilters = useCallback(() => {
     let results = [...rooms];
 
-    // Apply search term filter
+
     if (searchTerm) {
       results = results.filter(room =>
         room.roomType.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -506,7 +506,7 @@ function Rooms() {
       );
     }
 
-    // Apply other filters
+    
     if (filters.roomType) {
       results = results.filter(room => room.roomType === filters.roomType);
     }
@@ -565,7 +565,7 @@ function Rooms() {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/rooms');
+        const response = await axios.get(`${rooms_page_url}/api/rooms`);
         setRooms(response.data);
         setFilteredRooms(response.data);
         setLoading(false);
@@ -576,7 +576,7 @@ function Rooms() {
       }
     };
 
-    // Get student name from localStorage
+
     const studentData = localStorage.getItem('studentData');
     if (studentData) {
       const parsedData = JSON.parse(studentData);
@@ -834,7 +834,7 @@ function Rooms() {
                 <CardImage>
                   {room.roomPictures && room.roomPictures.length > 0 ? (
                     <img
-                      src={`http://localhost:5000${room.roomPictures[0]}`}
+                      src={`${rooms_page_url}${room.roomPictures[0]}`}
                       alt={room.roomType}
                     />
                   ) : (

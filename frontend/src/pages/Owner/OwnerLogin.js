@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import { FaHome, FaEye, FaEyeSlash, FaArrowRight } from "react-icons/fa";
 import "../../styles/OwnerLogin.css";
 
+const owner_url = process.env.REACT_APP_API_URL
+
 const OwnerLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +41,7 @@ const OwnerLogin = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/owner/login",
+        `${owner_url}/api/owner/login`,
         { email, password },
         { headers: { "Content-Type": "application/json" } }
       );
